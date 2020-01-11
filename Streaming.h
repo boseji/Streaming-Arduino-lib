@@ -30,8 +30,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // Generic template
 template<class T> 
-inline Print &operator <<(Print &stream, T arg) 
-{ stream.print(arg); return stream; }
+inline Print &operator <<(Print &obj, T arg) 
+{ obj.print(arg); return obj; }
 
 struct _BASED 
 { 
@@ -101,5 +101,16 @@ enum _EndLineCode { endl };
 
 inline Print &operator <<(Print &obj, _EndLineCode arg) 
 { obj.println(); return obj; }
+
+// Coma Separator for parameters 
+//  - from https://www.avdweb.nl/arduino/misc/albert-library
+// Instead of writing - Serial << i << ", " << j << ", " << k;
+// We can write  - Serial << i, j, k;
+template<class T> 
+inline Print &operator ,(Print &obj, const T arg) 
+{ obj.print(" ");
+  obj.print(arg); 
+  return stream; 
+}
 
 #endif
